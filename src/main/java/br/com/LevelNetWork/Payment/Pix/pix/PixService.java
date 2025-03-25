@@ -17,6 +17,10 @@ public class PixService {
 
     private final JSONObject configuracoes;
 
+    public static final int SECONDS_IN_EXPIRATION = 3600;
+    public static final String CPF = "12345678909";
+    public static final String NAME = "Eudes";
+
     public PixService(final PixConfig pixConfig) {
         this.configuracoes = new JSONObject();
         this.configuracoes.put("client_id", pixConfig.clientId());
@@ -43,8 +47,8 @@ public class PixService {
     public JSONObject criarQrCode(PixRequestPayload pixRequestPayload) {
 
         JSONObject body = new JSONObject();
-        body.put("calendario", new JSONObject().put("expiracao", 3600));
-        body.put("devedor", new JSONObject().put("cpf", "12345678909").put("nome", "Feltex Silva"));
+        body.put("calendario", new JSONObject().put("expiracao", SECONDS_IN_EXPIRATION));
+        body.put("devedor", new JSONObject().put("cpf", CPF).put("nome", NAME));
         body.put("valor", new JSONObject().put("original", pixRequestPayload.valor()));
         body.put("chave", pixRequestPayload.chave());
 
